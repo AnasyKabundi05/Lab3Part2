@@ -24,7 +24,9 @@ public class productsService {
     }
 
     public Products createProducts(Long id){
-        return productsRepository.save(id);
+        Products product = new Products();
+
+        return productsRepository.save(product);
     }
 
 

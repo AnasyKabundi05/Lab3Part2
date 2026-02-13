@@ -3,6 +3,7 @@ package com.example.lab3part2.api;
 import com.example.lab3part2.domain.Category;
 import com.example.lab3part2.service.categoryService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,8 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping
-    public Category createCategory(Long id){
+    @GetMapping("/{id}")
+    public Category createCategory(@PathVariable Long id){
       return   categoryService.createCategory(id);
     }
 }
