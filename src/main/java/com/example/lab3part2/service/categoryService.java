@@ -22,8 +22,13 @@ public class categoryService {
         return categoryRepository.findAll();
     }
 
-    public Category createCategory(Long id){
-        return createCategory(id);
+    public Category createCategory(Category category){
+        return categoryRepository.save(category);
+    }
+
+    public Category getCategoryById(Long id){
+        return categoryRepository.findById(id)
+                .orElseThrow( () -> new RuntimeException("No category found" + id));
     }
 
 

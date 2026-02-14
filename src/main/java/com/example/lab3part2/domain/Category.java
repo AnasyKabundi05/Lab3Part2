@@ -1,7 +1,10 @@
 package com.example.lab3part2.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Category {
@@ -10,16 +13,15 @@ public class Category {
     private Long id;
     private String categoryName;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
-    @JsonBackReference
-    private Products products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Products> product;
 
-    public Category(){
+    public Category() {
 
     }
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
@@ -33,5 +35,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<Products> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Products> product) {
+        this.product = product;
     }
 }

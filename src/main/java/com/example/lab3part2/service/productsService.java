@@ -1,5 +1,6 @@
 package com.example.lab3part2.service;
 
+import com.example.lab3part2.domain.Category;
 import com.example.lab3part2.domain.Products;
 import com.example.lab3part2.repository.productsRepository;
 import com.example.lab3part2.repository.categoryRepository;
@@ -23,8 +24,16 @@ public class productsService {
         return productsRepository.findAll();
     }
 
-    public Products createProducts(Long id){
-        Products product = new Products();
+    public Products createProduct(Long id, Products product){
+
+        Category category = categoryRepository.findById(id).orElseThrow( () -> new RuntimeException("Category Id not found" + id));
+
+        product.setCategory(category);
+
+        return productsRepository.save(product);
+    }
+
+    public Products addProduct(Products product){
 
         return productsRepository.save(product);
     }

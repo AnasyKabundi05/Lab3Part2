@@ -1,9 +1,9 @@
 package com.example.lab3part2.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Products {
@@ -12,6 +12,11 @@ public class Products {
     private Long id;
     private String productDescription;
     private double productPrice;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "category_id")
+    @JsonBackReference
+    private Category category;
 
     public Products(){
 
@@ -39,5 +44,14 @@ public class Products {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
